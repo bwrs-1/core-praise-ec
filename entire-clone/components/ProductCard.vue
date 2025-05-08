@@ -6,26 +6,31 @@
       :src="product.image"
       cover
     >
-      <v-card-title>{{ product.title }}</v-card-title>
+      <v-card-title>{{ product.name }}</v-card-title>
     </v-img>
 
     <v-card-subtitle class="pt-4">
-      {{ product.handle }}
+      {{ product.description }}
     </v-card-subtitle>
 
     <v-card-actions>
-      <!-- Shopifyで購入ボタン -->
+      <!-- Stores.jp ボタン -->
       <v-btn
-        color="black"
-        @click="goToShopify(product.handle)"
-      >
-        {{ "Buy" }}
-      </v-btn>
+        class="storesjp-button"
+        :data-storesjp-item="product.storesjpItem"
+        :data-storesjp-variation="product.storesjpVariation"
+        :data-storesjp-name="product.storesjpName"
+        data-storesjp-layout="layout_a"
+        data-storesjp-lang="ja"
+      ></v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup lang="ts">
+import { defineProps, onMounted } from 'vue';
+
+// 親コンポーネントから渡される商品データ
 defineProps({
   product: {
     type: Object,
@@ -33,9 +38,39 @@ defineProps({
   }
 });
 
-// Shopifyの決済ページに遷移する関数
-function goToShopify(handle: any) {
-  // window.location.href = "https://cptr00-1d.myshopify.com/products/" + handle; // Shopifyの決済ページに遷移
-  window.location.href = "https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js"; // Shopifyの決済ページに遷移
+// スクリプトを動的にロードする関数
+function loadStoresJpScript() {
+  const scriptId = 'storesjp-button';
+  if (document.getElementById(scriptId)) {
+    console.log('Stores.jpスクリプトは既にロードされています');
+    return; // 既にスクリプトがロードされている場合は何もしない
+  }
+
+  const script = document.createElement('script');
+  script.id = scriptId;
+  script.src = '//btn.stores.jp/button.js';
+  script.charset = 'UTF-8';
+  script.async = true;
+
+  script.onload = () => {
+    console.log('Stores.jpスクリプトがロードされました');
+  };
+
+  const firstScript = document.getElementsByTagName('script')[0];
+  firstScript.parentNode?.insertBefore(script, firstScript);
 }
+
+// Vueのマウント時にスクリプトをロード
+onMounted(() => {
+  loadStoresJpScript();
+
+  // ボタン生成のテスト
+  console.log('商品データ:', product);
+  const buttonContainer = document.querySelector('.storesjp-button');
+  if (buttonContainer) {
+    console.log('Stores.jpボタンのコンテナが見つかりました:', buttonContainer);
+  } else {
+    console.error('Stores.jpボタンのコンテナが見つかりません');
+  }
+});
 </script>
