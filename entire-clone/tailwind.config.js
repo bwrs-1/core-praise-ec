@@ -3,11 +3,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Suisse Intl', 'sans-serif']
+        sans: ['Suisse Intl', 'sans-serif'],
       },
       colors: {
-        background: '#f5f5f5',
-        primary: '#111'
+        background: '#f4f4f4',
       }
     }
   },
