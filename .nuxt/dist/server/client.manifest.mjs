@@ -1,1 +1,0 @@
-export { default } from "file:///workspaces/core-praise-ec/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"

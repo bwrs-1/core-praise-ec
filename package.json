@@ -1,5 +1,5 @@
 {
-  "name": "entire-clone",
+  "name": "core-praise",
   "version": "1.0.0",
   "scripts": {
     "dev": "nuxt dev",
