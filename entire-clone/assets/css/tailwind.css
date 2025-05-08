@@ -3,8 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-    background-color: #000; /* 背景を黒に設定 */
-    color: #fff; /* テキストを白に設定 */
-    font-family: 'Inter', sans-serif;
+* {
+    font-family: 'Helvetica', sans-serif;
   }

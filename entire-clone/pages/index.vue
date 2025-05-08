@@ -1,124 +1,89 @@
 <template>
-  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
-    <source src="/workspaces/core-praise-ec/entire-clone/assets/css/videos/background.mp4" type="video/mp4" />
-  </video>
-
-  <v-layout class="rounded rounded-md">
-
-    <!-- <v-card class="w-full relative" flat color="grey lighten-4">
-    <div class="text-center w-full">
-      drop 10 ONLINE NOW
-    </div>
-  </v-card> -->
-
-    <!-- ヘッダー -->
-    <v-app-bar density="compact" :elevation="0" class="text-center" color="transparent">
-
-      <template v-slot:prepend>
-        <v-btn>back to</v-btn>
-        <v-btn>info</v-btn>
-      </template>
-      <v-app-bar-title>"CORE PRAISE"</v-app-bar-title>
-
-      <template v-slot:append>
-        <v-btn>collection</v-btn>
-        <v-btn icon="mdi-magnify"></v-btn>
-        <v-btn>bag</v-btn>
-      </template>
-    </v-app-bar>
-
-    <v-main>
-      <v-container fluid>
-        <v-row dense justify="end"> <!-- justify="end" に変更 -->
-          <v-col v-for="n in 8" :key="n" cols="12">
-            <v-btn height="20" class="d-flex align-end flex-column bg-surface-variant"></v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
-
-    <!-- 商品一覧 -->
-    <v-main class="d-flex align-center justify-center">
-      <v-container>
-        <!-- 商品情報をProductCardに渡す -->
-        <!-- <ProductCard v-for="product in products" :key="product.storesjpItem" :product="product" /> -->
-      </v-container>
-    </v-main>
-  </v-layout>
+  <v-responsive class="border rounded">
+    <v-app>
+      <v-content color="trransparent">
+        <div class="video-background">
+          <video autoplay loop muted playsinline class="video-element">
+            <source src="/workspaces/core-praise-ec/entire-clone/assets/css/videos/background.mp4" type="video/mp4">
+          </video>
+          <!-- ヘッダー -->
+          <Heder />
+          <!-- サイドメニュー -->
+          <SideMenu @filterByColor="handleFilterColor" @filterByCategory="handleFilterCategory" />
+          <!-- 商品一覧：両方のフィルターをpropとして渡す -->
+          <ProductCard :filterColor="selectedColor" :filterCategory="selectedCategory" />
+          <!-- フッター -->
+          <Footer />
+        </div>
+      </v-content>
+    </v-app>
+  </v-responsive>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import ProductCard from '~/components/ProductCard.vue';
+import Heder from '../components/Heder.vue';
+import SideMenu from '../components/SideMenu.vue';
+import ProductCard from '../components/ProductCard.vue';
+import Footer from '../components/Footer.vue';
 
-const products = ref([]); // 商品情報を格納する配列
+const selectedColor = ref<string>('');
+const selectedCategory = ref<string>('');
 
-// スクリプトを動的にロードする関数
-function loadStoresJpScript() {
-  const scriptId = 'storesjp-button';
-  if (document.getElementById(scriptId)) {
-    return; // 既にスクリプトがロードされている場合は何もしない
-  }
-
-  const script = document.createElement('script');
-  script.id = scriptId;
-  script.src = '//btn.stores.jp/button.js';
-  script.charset = 'UTF-8';
-  script.async = true;
-
-  const firstScript = document.getElementsByTagName('script')[0];
-  firstScript.parentNode?.insertBefore(script, firstScript);
+// クリックイベントでフィルター値を更新（色フィルターの場合）
+function handleFilterColor(color: string) {
+  selectedColor.value = color;
+  // 色フィルター選択時はカテゴリフィルターをリセットする場合
+  selectedCategory.value = '';
 }
 
-// 商品データをStores.jpから取得する関数
-async function fetchProductData() {
-  try {
-    const response = await fetch('https://api.stores.jp/v1/products', {
-      headers: {
-        Authorization: 'Bearer your-access-token' // Stores.jpのAPIトークンを設定
-      }
-    });
-    const data = await response.json();
-    products.value = data.map((item: any) => ({
-      image: item.image_url,
-      name: item.name,
-      description: item.description,
-      storesjpItem: item.id,
-      storesjpVariation: item.variation_id,
-      storesjpName: item.name
-    }));
-  } catch (error) {
-    console.error('商品データの取得に失敗しました:', error);
-  }
+// クリックイベントでフィルター値を更新（カテゴリフィルターの場合）
+function handleFilterCategory(category: string) {
+  selectedCategory.value = category;
+  // カテゴリフィルター選択時は色フィルターをリセットする場合
+  selectedColor.value = '';
 }
+
+const products = ref([]);
 
 // Vueのマウント時にスクリプトをロードし、商品データを取得
 onMounted(() => {
-  loadStoresJpScript();
-  fetchProductData();
 });
 </script>
 
 <style>
-/* 動画を背景に設定 */
-video {
+.video-element {
+  width: 100%;
+  height: 50%;
+  /* object-fit: cover; */
+}
+
+.transparent-app-bar {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(143, 45, 45);
+  justify-content: center;
+} */
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* 動画をコンテナ全体にフィット */
-  z-index: -1;
-  /* 背景として配置 */
+  z-index: 0;
 }
 
-.transparent-app-bar {
-  background-color: rgba(0, 0, 0, 0.5);
-  /* 半透明の黒背景 */
-  color: transparent;
-  /* 文字色を白に設定 */
-  justify-content: center;
-  /* 文字を中央に配置 */
+.overlay-content {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
 }
 </style>
