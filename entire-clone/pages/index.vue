@@ -1,32 +1,23 @@
 <template>
-  <div class="bg-black min-h-screen flex flex-col items-center justify-center px-4 py-8">
-    <h1 class="text-4xl font-bold mb-12 tracking-wide text-white">CORE PRAISE</h1>
-    <video controls autoplay loop muted class="w-full h-auto">
-      <source src="/workspaces/core-praise-ec/entire-clone/assets/css/videos/background.mp4" type="video/mp4" />
-      お使いのブラウザは動画をサポートしていません。
-    </video>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
-      <div
-        v-for="product in products"
-        :key="product.handle"
-        class="group relative border border-gray-700 rounded-lg overflow-hidden bg-gray-900"
-      >
-        <img
-          :src="product.image"
-          alt="Product Image"
-          class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-        <div class="p-4">
-          <h2 class="text-lg font-semibold text-white">{{ product.title }}</h2>
-        </div>
-      </div>
-    </div>
-  </div>
+  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0">
+    <source src="/workspaces/core-praise-ec/entire-clone/assets/css/videos/background.mp4" type="video/mp4" />
+  </video>
+
+  <v-layout class="rounded rounded-md border">
+    <v-app-bar title="CORE PRAISE"></v-app-bar>
+
+    <v-main class="d-flex align-center justify-center">
+      <v-container>
+        <ProductCard v-for="product in products" :key="product.handle" :product="product" />
+      </v-container>
+    </v-main>
+  </v-layout>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { fetchShopifyProducts } from '~/utils/shopify';
+import ProductCard from '~/components/ProductCard.vue';
 
 const products = ref([]);
 
@@ -36,8 +27,16 @@ onMounted(async () => {
 </script>
 
 <style>
-.video-container {
-  max-width: 800px;
-  margin: 0 auto;
+/* 動画を背景に設定 */
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* 動画をコンテナ全体にフィット */
+  z-index: -1;
+  /* 背景として配置 */
 }
 </style>

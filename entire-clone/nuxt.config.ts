@@ -1,7 +1,16 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  css: ['~/assets/css/tailwind.css'],
+  modules: [], // Vuetifyプラグインを追加
+  css: ['vuetify/styles', '@mdi/font/css/materialdesignicons.css'], // Vuetifyとアイコンのスタイル
+  build: {
+    transpile: ['vuetify'], // Vuetifyをトランスパイル対象に追加
+  },
+  vite: {
+    define: {
+      'process.env.DEBUG': false,
+    },
+  },
   runtimeConfig: {
     public: {
       shopifyDomain: "cptr00-1d.myshopify.com",
