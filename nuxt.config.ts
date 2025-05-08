@@ -2,9 +2,9 @@ import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
   modules: [], // Vuetifyプラグインを追加
-  css: ['vuetify/styles', '@mdi/font/css/materialdesignicons.css'], // Vuetifyとアイコンのスタイル
+  css: ['vuetify/styles', '@mdi/font/css/materialdesignicons.css'],
   build: {
-    transpile: ['vuetify'], // Vuetifyをトランスパイル対象に追加
+    transpile: ['vuetify']
   },
   vite: {
     define: {
@@ -28,10 +28,10 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
+    preset: 'vercel',  // 追加：Vercel用ビルド出力に変更
     storage: {
       data: {
         driver: 'vercelKV'
-        /* Vercel KV driver options */
       }
     }
   }
