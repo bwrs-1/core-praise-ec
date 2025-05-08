@@ -55,14 +55,13 @@ onMounted(() => {
 .video-element {
   width: 100%;
   height: 50%;
-  /* object-fit: cover; */
 }
 
 .transparent-app-bar {
   background-color: rgba(0, 0, 0, 0.5);
   color: rgb(143, 45, 45);
   justify-content: center;
-} */
+}
 
 .video-container {
   position: relative;

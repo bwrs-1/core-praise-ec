@@ -28,6 +28,11 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    preset: 'vercel' // Vercel用のプリセットを使用
+    storage: {
+      data: {
+        driver: 'vercelKV'
+        /* Vercel KV driver options */
+      }
+    }
   }
 })
