@@ -7,12 +7,12 @@
     "module": true,
     "resourceType": "script"
   },
-  "/workspaces/core-praise-ec/entire-clone/node_modules/nuxt/dist/app/entry.js": {
+  "/workspaces/core-praise-ec/node_modules/nuxt/dist/app/entry.js": {
     "resourceType": "script",
     "module": true,
     "prefetch": true,
     "preload": true,
     "isEntry": true,
-    "file": "/workspaces/core-praise-ec/entire-clone/node_modules/nuxt/dist/app/entry.js"
+    "file": "/workspaces/core-praise-ec/node_modules/nuxt/dist/app/entry.js"
   }
 }

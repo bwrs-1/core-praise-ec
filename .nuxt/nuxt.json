@@ -1,7 +1,7 @@
 {
-  "_hash": "eAnOTBcdhJ-AreWJG50EJj2j0YjWDavDhNeuN2r7gU8",
+  "_hash": "qlPTE9-JnDJ0INupyEPHN2vJEQq1i2JIaGaMt7RzPcs",
   "project": {
-    "rootDir": "/workspaces/core-praise-ec/entire-clone"
+    "rootDir": "/workspaces/core-praise-ec"
   },
   "versions": {
     "nuxt": "3.17.2"

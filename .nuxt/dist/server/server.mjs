@@ -1,1 +1,1 @@
-export { default } from "file:///workspaces/core-praise-ec/entire-clone/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
+export { default } from "file:///workspaces/core-praise-ec/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"

@@ -4,7 +4,7 @@
       <v-content color="trransparent">
         <div class="video-background">
           <video autoplay loop muted playsinline class="video-element">
-            <source src="/workspaces/core-praise-ec/entire-clone/assets/css/videos/background.mp4" type="video/mp4">
+            <source src="/workspaces/core-praise-ec/assets/css/videos/background.mp4" type="video/mp4">
           </video>
           <!-- ヘッダー -->
           <Heder />
