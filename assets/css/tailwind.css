@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+  /* 全要素に対してフォントを指定 */
+*, *::before, *::after {
+  font-family: 'Helvetica', sans-serif;
+}
+
 * {
-    font-family: 'Helvetica', sans-serif;
-  }
+  text-transform: lowercase;
+}

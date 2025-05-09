@@ -1,29 +1,31 @@
 <template>
   <v-navigation-drawer :width="200" location="right" floating permanent color="transparent" bodre="0">
     <v-row dense>
-      <v-col v-for="n in subMenu1" :key="n" cols="12">
-        <v-btn :elevation="0" color="transparent">{{ n }}</v-btn>
+      <v-col cols="12">
+        <v-list-item v-for="item in items1" :key="item.title" link @click="filterProducts(item.title)">
+
+          <v-list-item-subtitle>{{ item.title }}</v-list-item-subtitle>
+        </v-list-item>
       </v-col>
     </v-row>
     <v-divider></v-divider>
     <v-row dense>
-      <!-- category 用のボタン。:key は category を使用 -->
-      <v-col v-for="category in subMenu2" :key="category" cols="12">
-        <v-btn :elevation="0" color="transparent" @click="filterCategory(category)">
-          {{ category }}
-        </v-btn>
+      <v-col cols="12">
+        <v-list-item v-for="item in items2" :key="item.title" link @click="filterCategory(item.title)">
+          <v-list-item-subtitle>{{ item.title }}</v-list-item-subtitle>
+        </v-list-item>
+
       </v-col>
     </v-row>
     <v-divider></v-divider>
     <v-row dense>
-      <!-- 既存の selectColor ボタン -->
-      <v-col v-for="selectColor in subMenu3" :key="selectColor" cols="12">
-        <v-btn :elevation="0" color="transparent" append-icon="mdi-circle" @click="filterProducts(selectColor)">
-          {{ selectColor }}
+      <v-col>
+        <v-list-item v-for="item in items3" :key="item.title" link @click="filterProducts(item.title)">
+          <v-list-item-subtitle>{{ item.title }}</v-list-item-subtitle>
           <template v-slot:append>
-            <v-icon :color="selectColor"></v-icon>
+            <v-icon :icon="item.icon" :color="item.title"></v-icon>
           </template>
-        </v-btn>
+        </v-list-item>
       </v-col>
     </v-row>
   </v-navigation-drawer>
@@ -32,9 +34,20 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const subMenu1 = ref(['refine']);
-const subMenu2 = ref(['all', 'tops', 'other']);
-const subMenu3 = ref(['black', 'white', 'orange-accent-1']);
+const items1 = ref([
+  { title: 'refine' },
+])
+const items2 = ref([
+  { title: 'all' },
+  { title: 'tops' },
+  { title: 'other' },
+])
+
+const items3 = ref([
+  { icon: 'mdi-circle', title: 'black' },
+  { icon: 'mdi-circle', title: 'white' },
+  { icon: 'mdi-circle', title: 'orange-accent-1' },
+])
 
 // 複数フィルター用のイベントを emit します
 const emit = defineEmits(['filterByColor', 'filterByCategory']);

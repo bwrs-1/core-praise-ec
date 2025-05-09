@@ -1,10 +1,7 @@
 <template>
-    <!-- <v-app-bar scroll-behavior="hide" scroll-threshold="0"density="compact" :elevation="1" class="text-center" color="transparent"> -->
     <v-app-bar density="compact" :elevation="0" class="text-center" color="transparent">
-
-
         <template v-slot:prepend>
-            <v-btn>back to</v-btn>
+            <v-btn>← back to</v-btn>
             <v-bottom-sheet inset>
                 <template v-slot:activator="{ props: activatorProps }">
                     <v-btn v-bind="activatorProps" text="Info"></v-btn>
@@ -27,7 +24,7 @@
                 </v-card>
             </v-bottom-sheet>
         </template>
-        <v-app-bar-title scroll-behavior="hide" scroll-threshold="0">' C O R E  P R A I S E '</v-app-bar-title>
+        <v-app-bar-title scroll-behavior="hide" scroll-threshold="0"> C O R E  P R A I S E </v-app-bar-title>
 
         <template v-slot:append>
             <v-btn>collection</v-btn>
@@ -40,3 +37,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 </script>
+
+<style scoped>
+</style>

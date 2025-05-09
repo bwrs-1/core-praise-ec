@@ -10,6 +10,12 @@ export default defineNuxtConfig({
     define: {
       'process.env.DEBUG': false,
     },
+    server: {
+      hmr: {
+        protocol: 'ws',  // 必要に応じて http や https に変更も可能
+        host: 'localhost' // 開発環境のホスト名に合わせて設定
+      }
+    }
   },
   runtimeConfig: {
     public: {
@@ -28,7 +34,7 @@ export default defineNuxtConfig({
     }
   },
   nitro: {
-    preset: 'vercel',  // 追加：Vercel用ビルド出力に変更
+    preset: 'vercel',  // Vercel用ビルド出力に変更
     storage: {
       data: {
         driver: 'vercelKV'
